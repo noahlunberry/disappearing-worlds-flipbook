@@ -3,56 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <title>Disappearing Worlds Flipbook</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="turn.min.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      background: #333;
+      background: #111;
+      overflow: hidden;
     }
+
     #flipbook {
       width: 90vw;
       height: 90vh;
       margin: 5vh auto;
     }
+
     #flipbook .page {
       width: 100%;
       height: 100%;
     }
-    img {
+
+    #flipbook img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div id="flipbook">
-    <!-- Pages will be inserted here -->
-  </div>
+
+  <div id="flipbook"></div>
+
+  <!-- jQuery and turn.js -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="turn.min.js"></script>
 
   <script>
-    const totalPages = 133;
-    const flipbook = document.getElementById('flipbook');
+    $(document).ready(function () {
+      const totalPages = 133;
+      const $flipbook = $('#flipbook');
 
-    for (let i = 1; i <= totalPages; i++) {
-      const pageDiv = document.createElement('div');
-      pageDiv.className = 'page';
-      const img = document.createElement('img');
-      img.src = `page${i}.jpg`;
-      pageDiv.appendChild(img);
-      flipbook.appendChild(pageDiv);
-    }
+      for (let i = 1; i <= totalPages; i++) {
+        const page = $('<div class="page"><img src="page' + i + '.jpg" alt="Page ' + i + '"></div>');
+        $flipbook.append(page);
+      }
 
-    $('#flipbook').turn({
-      width: $('#flipbook').width(),
-      height: $('#flipbook').height(),
-      autoCenter: true,
-      display: 'double',
-      acceleration: true,
-      gradients: true
+      $flipbook.turn({
+        width: $flipbook.width(),
+        height: $flipbook.height(),
+        autoCenter: true,
+        display: 'double',
+        elevation: 50,
+        gradients: true,
+        duration: 1000
+      });
     });
   </script>
+
 </body>
 </html>
