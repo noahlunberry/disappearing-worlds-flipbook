@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Disappearing Worlds Flipbook</title>
+  <style>
+    body {
+      margin: 0;
+      background: #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #flipbook {
+      width: 800px;
+      height: 600px;
+    }
+    #flipbook .page {
+      width: 400px;
+      height: 600px;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="turn.min.js"></script>
+</head>
+<body>
+
+  <div id="flipbook">
+    <!-- PAGE LOADING -->
+    <!-- Pages will be added by JavaScript -->
+  </div>
+
+  <script>
+    const flipbook = document.getElementById('flipbook');
+    const totalPages = 133;
+
+    for (let i = 1; i <= totalPages; i++) {
+      const page = document.createElement('div');
+      page.className = 'page';
+      const img = document.createElement('img');
+      img.src = `page${i}.jpg`;
+      img.alt = `Page ${i}`;
+      page.appendChild(img);
+      flipbook.appendChild(page);
+    }
+
+    $('#flipbook').turn({
+      width: 800,
+      height: 600,
+      autoCenter: true
+    });
+  </script>
+
+</body>
+</html>
+
